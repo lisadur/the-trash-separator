@@ -1,7 +1,6 @@
 window.onload = function () {
   const startButton = document.getElementById("start-button");
-  const restartButton = document.getElementById("restart-button");
-  const game = new Game(); //actually "calling" the Game class
+  const game = new Game(trash); //actually "calling" the Game class
   startButton.addEventListener("click", function () {
     startGame();
   });
@@ -16,7 +15,7 @@ const trash = [
   {
     name: "pizzabox",
     img: "/the-trash-separator/images/pizza-box.png",
-    bin: "black", //example object
+    bin: "black",
   },
   {
     name: "milkcarton",
@@ -93,51 +92,54 @@ const trash = [
 // <-- game.js --> //
 
 class Game {
-  constructor(trash) {
+  constructor(trashArr) {
     this.startScreen = document.querySelector("#game-start");
     this.gameScreen = document.querySelector("#game-play");
     this.gameEndScreen = document.querySelector("#game-end");
     this.currentTrashIndex = 0;
+    this.trashImg;
     this.height = 500;
     this.width = 500;
-    this.trash = trash;
+    this.trashArr = trashArr;
+    this.trashImg = document.createElement("img");
+    this.trashImg.style.position = "relative";
+    this.trashImg.style.width = "155px";
+    this.gameScreen.appendChild(this.trashImg);
     this.score = 0;
     this.lives = 2;
     this.gameIsOver = false;
   }
-  //3 methoden: screen erscheinen und wegmachen, sowie shufflen
+
   start() {
     this.gameScreen.style.height = `${this.height}px`;
     this.gameScreen.style.width = `${this.width}px`;
-    this.gameScreen.style.display = "block";
+    this.gameScreen.style.display = "grid";
+    this.gameScreen.style.placeItems = "center";
     this.startScreen.style.display = "none";
     this.gameShuffle();
     this.gameLoop();
   }
 
   gameShuffle() {
-    for (let i = this.trash.length - 1; i > 0; i--) {
+    for (let i = this.trashArr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      const temp = this.trash[i];
-      this.trash[i] = this.trash[j];
-      this.trash[j] = temp;
+      const temp = this.trashArr[i];
+      this.trashArr[i] = this.trashArr[j];
+      this.trashArr[j] = temp;
     }
-
-    const currentTrashItem = this.trash[this.currentTrashIndex];
-    const imgElement = document.createElement("img");
-    imgElement.src = currentTrashItem.img;
-
-    this.gameScreen.appendChild((new Image().src = this.trash[0].img));
+    const firstTrashObject = this.trashArr[0];
+    console.log(firstTrashObject);
+    console.log(this.trashArr);
+    console.log(this.trashArr[this.currentTrashIndex].img);
   }
 
   gameLoop() {
     if (this.gameIsOver === true) {
       return;
     }
-    //this.update(); //if game is not over, load my next trash item
+    this.trashImg.src = this.trashArr[this.currentTrashIndex].img;
+    this.currentTrashIndex++;
+    if (this.currentTrashIndex >= this.trashArr.length) {
+    }
   }
-
-  //update() {
-  //this.trash.update();
-  //}
 }
