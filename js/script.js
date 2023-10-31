@@ -244,4 +244,3 @@ class Game {
   }
 }
 
-// NEXT: What happens when lives > 0 and array is empty -> YOU WIN

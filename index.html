@@ -16,29 +16,14 @@
   </head>
   <body>
     <main>
-      <img
-        class="logo-img"
-        src="/the-trash-separator/images/logo-trash-separator-final.png"
-        alt="the-trash-separator-logo"
-      />
-      <!-- #game-start is initially shown on the game start screen // -->
-      <div id="game-start">
-        <header>
-          <h1>Dispose trash into the correct bin!</h1>
-          <hr />
-        </header>
-
-        <section>
-          <p class="intro">
-            Welcome to Germany! Make your landlord happy and contribute to
-            recycling trash by allocating it into the correct bins.
-            <span class="bold-text"> Use the arrow keys on your keyboard!</span>
-            You can only fail once, so be careful.
-          </p>
+      <header>
+        <div class="score-container"></div>
+        <div class="instructions-bins">
+          <h3>Bin color meanings</h3>
           <ul>
             <li>
               <span style="color: #7fb069; font-weight: 700">Green bin:</span>
-              Organic waste*
+              Organic waste
             </li>
             <li>
               <span style="color: #f5b82e; font-weight: 700">Yellow bin:</span>
@@ -52,8 +37,23 @@
               <span style="font-weight: 700">Black bin:</span> Residual waste
             </li>
           </ul>
-          <p class="note">
-            *Note: Organic waste bins in your area may be brown or green.
+        </div>
+        <img
+          class="logo-img"
+          src="/the-trash-separator/images/logo-trash-separator-final.png"
+          alt="the-trash-separator-logo"
+        />
+      </header>
+      <!-- #game-start is initially shown on the game start screen // -->
+      <div id="game-start">
+        <h1>Dispose trash into the correct bin!</h1>
+        <hr />
+
+        <section>
+          <p class="intro">
+            Welcome to Germany! Make your landlord happy and contribute to
+            recycling trash by allocating it into the correct bins.
+            <span class="bold-text"> Use the arrow keys on your keyboard!</span>
           </p>
         </section>
 
