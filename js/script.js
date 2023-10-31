@@ -9,6 +9,130 @@ window.onload = function () {
     console.log("start game");
     game.start();
   }
+
+  function handleKeydown(event) {
+    const key = event.key;
+    const possibleKeystrokes = [
+      "ArrowLeft",
+      "ArrowUp",
+      "ArrowRight",
+      "ArrowDown",
+    ];
+
+    if (possibleKeystrokes.includes(key)) {
+      event.preventDefault();
+
+      switch (key) {
+        case "ArrowLeft":
+          console.log("CURRENT TRASH INDEX", game.currentTrashIndex);
+
+          console.log("CURRENT TRASH IMAGE", game.trashImg.src);
+
+          console.log("CURRENT TRASH OBJ", game.trashArr[0]);
+          if (game.trashArr[0].bin === "black") {
+            game.trashArr.splice(game.trashArr[0], 1);
+            game.trashImg.src = game.trashArr[0].img;
+          } else {
+            // game.gameIsOver = true;
+            console.log("GAME IS OVER !!!");
+          }
+
+          // VERY VERY IMPORTANT FOR IMAGE CHANGES!
+          //   game.trashImg.src = game.trashArr[0].img;
+
+          console.log("WHOLE ARRAY", game.trashArr);
+          console.log("Arrow Left");
+          break;
+        case "ArrowUp":
+          console.log("CURRENT TRASH INDEX", game.currentTrashIndex);
+
+          console.log("CURRENT TRASH IMAGE", game.trashImg.src);
+
+          console.log("CURRENT TRASH OBJ", game.trashArr[0]);
+          if (game.trashArr[0].bin === "green") {
+            game.trashArr.splice(game.trashArr[0], 1);
+            game.trashImg.src = game.trashArr[0].img;
+          } else {
+            // game.gameIsOver = true;
+            console.log("GAME IS OVER !!!");
+          }
+
+          // VERY VERY IMPORTANT FOR IMAGE CHANGES!
+          //   game.trashImg.src = game.trashArr[0].img;
+
+          console.log("WHOLE ARRAY", game.trashArr);
+          console.log("Arrow Up");
+          break;
+        case "ArrowRight":
+          console.log("CURRENT TRASH INDEX", game.currentTrashIndex);
+
+          console.log("CURRENT TRASH IMAGE", game.trashImg.src);
+
+          console.log("CURRENT TRASH OBJ", game.trashArr[0]);
+          if (game.trashArr[0].bin === "yellow") {
+            game.trashArr.splice(game.trashArr[0], 1);
+            game.trashImg.src = game.trashArr[0].img; //this is changing my image
+          } else {
+            // game.gameIsOver = true;
+            console.log("GAME IS OVER !!!");
+          }
+
+          console.log("WHOLE ARRAY", game.trashArr);
+          console.log("Arrow Right");
+          break;
+        case "ArrowDown":
+          console.log("CURRENT TRASH INDEX", game.currentTrashIndex);
+
+          console.log("CURRENT TRASH IMAGE", game.trashImg.src);
+
+          console.log("CURRENT TRASH OBJ", game.trashArr[0]);
+          if (game.trashArr[0].bin === "blue") {
+            game.trashArr.splice(game.trashArr[0], 1);
+            game.trashImg.src = game.trashArr[0].img;
+          } else {
+            // game.gameIsOver = true;
+            console.log("GAME IS OVER !!!");
+          }
+
+          console.log("WHOLE ARRAY", game.trashArr);
+          console.log("Arrow Down");
+          break;
+      }
+    }
+  }
+  function handleKeyup(event) {
+    //need to pass the event because we need to know which key was pressed, unlike for click where we don't have to "store" what was pressed
+    const key = event.key;
+    const possibleKeystrokes = [
+      "ArrowLeft",
+      "ArrowUp",
+      "ArrowRight",
+      "ArrowDown",
+    ];
+
+    if (possibleKeystrokes.includes(key)) {
+      event.preventDefault(); //prevent the default behaviour of the keys! NEED THIS
+
+      switch (key) {
+        case "ArrowLeft":
+          console.log("Keyed up => Arrow left");
+          break;
+        case "ArrowUp":
+          console.log("Keyed up => ArrowUp");
+          break;
+        case "ArrowRight":
+          console.log("Keyed up => ArrowRight");
+          break;
+        case "ArrowDown":
+          console.log("Keyed up => ArrowDown");
+          break;
+      }
+    }
+  }
+
+  window.addEventListener("keyup", handleKeyup);
+
+  window.addEventListener("keydown", handleKeydown);
 };
 
 const trash = [
@@ -89,8 +213,8 @@ const trash = [
   },
 ];
 
-// <-- game.js --> //
-
+// let currentObj;
+// let wholeShuffledObjectArray;
 class Game {
   constructor(trashArr) {
     this.startScreen = document.querySelector("#game-start");
@@ -106,7 +230,7 @@ class Game {
     this.trashImg.style.width = "155px";
     this.gameScreen.appendChild(this.trashImg);
     this.score = 0;
-    this.lives = 2;
+    this.lives = 1;
     this.gameIsOver = false;
   }
 
@@ -117,7 +241,7 @@ class Game {
     this.gameScreen.style.placeItems = "center";
     this.startScreen.style.display = "none";
     this.gameShuffle();
-    this.gameLoop();
+    this.update();
   }
 
   gameShuffle() {
@@ -127,18 +251,21 @@ class Game {
       this.trashArr[i] = this.trashArr[j];
       this.trashArr[j] = temp;
     }
+
     const firstTrashObject = this.trashArr[0];
     console.log(firstTrashObject);
     console.log(this.trashArr);
     console.log(this.trashArr[this.currentTrashIndex].img);
+    // OUTSIDE THE CLASS FOR CLICK EVENTS
+    // wholeShuffledObjectArray = this.trashArr;
+    // currentObj = firstTrashObject;
   }
 
-  gameLoop() {
+  update() {
     if (this.gameIsOver === true) {
       return;
     }
     this.trashImg.src = this.trashArr[this.currentTrashIndex].img;
-    this.currentTrashIndex++;
     if (this.currentTrashIndex >= this.trashArr.length) {
     }
   }
