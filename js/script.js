@@ -1,6 +1,7 @@
 window.onload = function () {
   const startButton = document.getElementById("start-button");
   const game = new Game(trash); //actually "calling" the Game class
+  let keydownListenerAdded = false; //storing in a variable if the arrow keys were added, should not work before startGame()!!!
   startButton.addEventListener("click", function () {
     startGame();
   });
@@ -8,9 +9,18 @@ window.onload = function () {
   function startGame() {
     console.log("start game");
     game.start();
+
+    if (!keydownListenerAdded) {
+      window.addEventListener("keydown", handleKeydown); //adding now after game.start()
+      keydownListenerAdded = true;
+    }
   }
 
   function handleKeydown(event) {
+    if (game.gameIsOver) {
+      window.removeEventListener("keydown", handleKeydown); //removing the EventListener once game is over
+      return;
+    }
     const key = event.key;
     const possibleKeystrokes = [
       "ArrowLeft",
@@ -22,117 +32,62 @@ window.onload = function () {
     if (possibleKeystrokes.includes(key)) {
       event.preventDefault();
 
-      switch (key) {
+      switch (
+        key // SHOULD NOT WORK ANYMORE ONCE GAME IS OVER, SHOULD ALSO NOT WORK BEFORE GAMESTART! MOVE IT DOWN
+      ) {
         case "ArrowLeft":
           console.log("CURRENT TRASH INDEX", game.currentTrashIndex);
-
           console.log("CURRENT TRASH IMAGE", game.trashImg.src);
-
           console.log("CURRENT TRASH OBJ", game.trashArr[0]);
           if (game.trashArr[0].bin === "black") {
-            game.trashArr.splice(game.trashArr[0], 1);
-            game.trashImg.src = game.trashArr[0].img;
+            game.newRound();
           } else {
-            // game.gameIsOver = true;
-            console.log("GAME IS OVER !!!");
+            game.lostRound();
           }
-
-          // VERY VERY IMPORTANT FOR IMAGE CHANGES!
-          //   game.trashImg.src = game.trashArr[0].img;
-
           console.log("WHOLE ARRAY", game.trashArr);
           console.log("Arrow Left");
           break;
         case "ArrowUp":
           console.log("CURRENT TRASH INDEX", game.currentTrashIndex);
-
           console.log("CURRENT TRASH IMAGE", game.trashImg.src);
-
           console.log("CURRENT TRASH OBJ", game.trashArr[0]);
           if (game.trashArr[0].bin === "green") {
-            game.trashArr.splice(game.trashArr[0], 1);
-            game.trashImg.src = game.trashArr[0].img;
+            game.newRound();
           } else {
-            // game.gameIsOver = true;
-            console.log("GAME IS OVER !!!");
+            game.lostRound();
           }
-
-          // VERY VERY IMPORTANT FOR IMAGE CHANGES!
-          //   game.trashImg.src = game.trashArr[0].img;
 
           console.log("WHOLE ARRAY", game.trashArr);
           console.log("Arrow Up");
           break;
         case "ArrowRight":
           console.log("CURRENT TRASH INDEX", game.currentTrashIndex);
-
           console.log("CURRENT TRASH IMAGE", game.trashImg.src);
-
           console.log("CURRENT TRASH OBJ", game.trashArr[0]);
-          if (game.trashArr[0].bin === "yellow") {
-            game.trashArr.splice(game.trashArr[0], 1);
-            game.trashImg.src = game.trashArr[0].img; //this is changing my image
-          } else {
-            // game.gameIsOver = true;
-            console.log("GAME IS OVER !!!");
-          }
 
+          if (game.trashArr[0].bin === "yellow") {
+            game.newRound();
+          } else {
+            game.lostRound();
+          }
           console.log("WHOLE ARRAY", game.trashArr);
           console.log("Arrow Right");
           break;
         case "ArrowDown":
           console.log("CURRENT TRASH INDEX", game.currentTrashIndex);
-
           console.log("CURRENT TRASH IMAGE", game.trashImg.src);
-
           console.log("CURRENT TRASH OBJ", game.trashArr[0]);
           if (game.trashArr[0].bin === "blue") {
-            game.trashArr.splice(game.trashArr[0], 1);
-            game.trashImg.src = game.trashArr[0].img;
+            game.newRound();
           } else {
-            // game.gameIsOver = true;
-            console.log("GAME IS OVER !!!");
+            game.lostRound();
           }
-
           console.log("WHOLE ARRAY", game.trashArr);
           console.log("Arrow Down");
           break;
       }
     }
   }
-  function handleKeyup(event) {
-    //need to pass the event because we need to know which key was pressed, unlike for click where we don't have to "store" what was pressed
-    const key = event.key;
-    const possibleKeystrokes = [
-      "ArrowLeft",
-      "ArrowUp",
-      "ArrowRight",
-      "ArrowDown",
-    ];
-
-    if (possibleKeystrokes.includes(key)) {
-      event.preventDefault(); //prevent the default behaviour of the keys! NEED THIS
-
-      switch (key) {
-        case "ArrowLeft":
-          console.log("Keyed up => Arrow left");
-          break;
-        case "ArrowUp":
-          console.log("Keyed up => ArrowUp");
-          break;
-        case "ArrowRight":
-          console.log("Keyed up => ArrowRight");
-          break;
-        case "ArrowDown":
-          console.log("Keyed up => ArrowDown");
-          break;
-      }
-    }
-  }
-
-  window.addEventListener("keyup", handleKeyup);
-
-  window.addEventListener("keydown", handleKeydown);
 };
 
 const trash = [
@@ -213,8 +168,6 @@ const trash = [
   },
 ];
 
-// let currentObj;
-// let wholeShuffledObjectArray;
 class Game {
   constructor(trashArr) {
     this.startScreen = document.querySelector("#game-start");
@@ -230,7 +183,8 @@ class Game {
     this.trashImg.style.width = "155px";
     this.gameScreen.appendChild(this.trashImg);
     this.score = 0;
-    this.lives = 1;
+    this.lives = 3;
+    this.originalTrashArrLength = trashArr.length;
     this.gameIsOver = false;
   }
 
@@ -241,7 +195,7 @@ class Game {
     this.gameScreen.style.placeItems = "center";
     this.startScreen.style.display = "none";
     this.gameShuffle();
-    this.update();
+    this.trashImg.src = this.trashArr[this.currentTrashIndex].img;
   }
 
   gameShuffle() {
@@ -251,22 +205,43 @@ class Game {
       this.trashArr[i] = this.trashArr[j];
       this.trashArr[j] = temp;
     }
-
-    const firstTrashObject = this.trashArr[0];
-    console.log(firstTrashObject);
-    console.log(this.trashArr);
-    console.log(this.trashArr[this.currentTrashIndex].img);
-    // OUTSIDE THE CLASS FOR CLICK EVENTS
-    // wholeShuffledObjectArray = this.trashArr;
-    // currentObj = firstTrashObject;
   }
 
-  update() {
+  newRound() {
     if (this.gameIsOver === true) {
       return;
-    }
-    this.trashImg.src = this.trashArr[this.currentTrashIndex].img;
-    if (this.currentTrashIndex >= this.trashArr.length) {
+    } else if (this.score >= this.originalTrashArrLength - 1) {
+      this.score++;
+      this.wonGame();
+    } else {
+      this.score++;
+      console.log("YOUR SCORE IS", this.score);
+      this.trashArr.splice(this.trashArr[0], 1); //updating my trashArr, moving to next Obj
+      this.trashImg.src = this.trashArr[0].img; // loading the next img
     }
   }
+
+  lostRound() {
+    this.lives--;
+    if (this.lives > 0) {
+      console.log("Try again - Use your Joker!");
+    } else {
+      this.lostGame();
+    }
+  }
+
+  lostGame() {
+    this.gameIsOver = true;
+    console.log(
+      `You lose! The item belongs in the ${this.trashArr[0].bin} bin!`
+    );
+  }
+
+  wonGame() {
+    this.gameIsOver = true;
+    console.log(`YOU WIN OMG!!!!!!!`);
+    console.log("YOUR SCORE IS", this.score);
+  }
 }
+
+// NEXT: What happens when lives > 0 and array is empty -> YOU WIN
