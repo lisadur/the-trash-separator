@@ -34,17 +34,12 @@ ul {
   list-style-position: inside;
   color: #474747;
   font-size: 14px;
+  padding-left: 25px;
 }
 
 #game-start .intro {
   color: #474747;
   font-size: 14px;
-}
-
-.note {
-  color: #474747;
-  font-style: normal;
-  font-size: 10px;
 }
 
 .bold-text {
@@ -72,4 +67,25 @@ ul {
   position: relative;
   background-image: url("../the-trash-separator/images/game-screen-background.png");
   background-size: cover;
+}
+
+header .instructions-bins {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  max-height: 150px;
+  width: 280px;
+  margin-left: 0;
+  background-color: #ffffff;
+  border: none;
+}
+
+h3 {
+  font-size: 16px;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
