@@ -15,7 +15,7 @@ body {
 #game-start {
   background: white;
   padding: 20px;
-  max-width: 650px;
+  max-width: 500px;
   text-align: center;
   margin: auto;
   border: none;
@@ -75,7 +75,7 @@ header .instructions-bins {
   text-align: center;
   display: flex;
   flex-direction: column;
-  max-height: 150px;
+  height: 150px;
   width: 280px;
   margin-left: 0;
   background-color: #ffffff;
@@ -124,7 +124,7 @@ header {
   background: white;
   display: none;
   padding: 20px;
-  max-width: 650px;
+  max-width: 500px;
   text-align: center;
   margin: auto;
   border: none;
