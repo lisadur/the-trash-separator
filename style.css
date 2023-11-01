@@ -67,7 +67,7 @@ ul {
   text-align: center;
   overflow: hidden;
   position: relative;
-  background-image: url("../the-trash-separator/images/game-screen-background.png");
+  background-image: url("../the-trash-separator/images/game-screen-background-level1-9.png");
   background-size: cover;
 }
 
@@ -86,7 +86,7 @@ header .score-container {
   display: none;
   text-align: left;
   font-weight: bolder;
-  width: 280px;
+  width: 240px;
   height: 150px;
   margin: 0;
   padding: 0 20px;
