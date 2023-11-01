@@ -18,6 +18,9 @@ class Game {
     this.originalTrashArrLength = trashArr.length;
     this.gameIsOver = false;
     this.trashAudio = document.getElementById("trash-sound");
+    this.failAudio = document.getElementById("fail-sound");
+    this.loseAudio = document.getElementById("lose-sound");
+    this.winAudio = document.getElementById("win-sound");
   }
 
   start() {
@@ -46,7 +49,7 @@ class Game {
       this.score++;
       document.getElementById("show-score").innerHTML++;
       document.getElementById("message").innerHTML = "HELL YEAH!";
-      this.trashAudio.play();
+      this.trashAudio.play(); // EXCHANGE FOR WINNING SOUND
       this.wonGame();
     } else if (this.score === 9) {
       this.score++;
@@ -73,7 +76,7 @@ class Game {
     document.getElementById("show-lives").innerHTML--;
     if (this.lives > 0) {
       document.getElementById("message").innerHTML = "Try again!";
-      console.log("Try again - Use your Joker!");
+      this.failAudio.play();
     } else {
       this.lostGame();
     }
@@ -83,6 +86,7 @@ class Game {
     this.gameIsOver = true;
     this.gameScreen.style.display = "none";
     this.gameEndLostScreen.style.display = "block";
+    this.loseAudio.play();
     document.getElementById("message").innerHTML = "Noooo!";
     // attach p loser text into class congrats:
     let loserParagraph = document.querySelector(".loser");
@@ -93,8 +97,6 @@ class Game {
     this.gameIsOver = true;
     this.gameScreen.style.display = "none";
     this.gameEndWinScreen.style.display = "block";
-    // somehow the restart button will not work if you won the game. Instead make a social share button?
-    console.log(`YOU WIN OMG!!!!!!!`);
-    console.log("YOUR SCORE IS", this.score);
+    this.winAudio.play();
   }
 }

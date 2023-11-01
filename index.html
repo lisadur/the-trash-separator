@@ -68,13 +68,24 @@
       </div>
       <!-- #game-play is initially hidden using CSS style display: none -->
       <div id="game-play">
-        <audio id="trash-sound" src="/the-trash-separator/paper-throw-1.mp3"></audio>
+        <audio
+          id="trash-sound"
+          src="/the-trash-separator/sounds/trash-sound.wav"
+        ></audio>
+        <audio
+          id="fail-sound"
+          src="/the-trash-separator/sounds/fail-sound.mp3"
+        ></audio>
       </div>
 
       <!-- #game-end-lost is initially hidden using CSS style display: none -->
       <div id="game-end-lost">
         <h1>Game over 😭</h1>
         <p class="loser"></p>
+        <audio
+          id="lose-sound"
+          src="/the-trash-separator/sounds/losing-sound.mp3"
+        ></audio>
         <button id="restart-button">Restart game</button>
       </div>
 
@@ -84,6 +95,10 @@
         <p class="congrats">
           Congratulations! You are Germany's top trash master. Wanna play again?
         </p>
+        <audio
+          id="win-sound"
+          src="/the-trash-separator/sounds/winning-sound.wav"
+        ></audio>
         <button id="win-restart-button">Play again</button>
       </div>
     </main>
