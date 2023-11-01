@@ -82,8 +82,35 @@ header .instructions-bins {
   border: none;
 }
 
+header .score-container {
+  display: none;
+  text-align: left;
+  font-weight: bolder;
+  width: 280px;
+  height: 150px;
+  margin: 0;
+  padding: 0 20px;
+  background-color: #ffffff;
+  border: none;
+  font-family: "Tabarra Black", sans-serif;
+}
+
+#show-score,
+#show-lives {
+  font-family: Montserrat;
+  color: red;
+}
+
 h3 {
   font-size: 16px;
+  margin-bottom: 5px;
+  font-family: "Tabarra Black", sans-serif;
+}
+
+.instructions-bins h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+  font-family: "Tabarra Black", sans-serif;
 }
 
 header {
