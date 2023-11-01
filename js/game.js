@@ -17,6 +17,7 @@ class Game {
     this.lives = 3;
     this.originalTrashArrLength = trashArr.length;
     this.gameIsOver = false;
+    this.trashAudio = document.getElementById("trash-sound");
   }
 
   start() {
@@ -45,6 +46,7 @@ class Game {
       this.score++;
       document.getElementById("show-score").innerHTML++;
       document.getElementById("message").innerHTML = "HELL YEAH!";
+      this.trashAudio.play();
       this.wonGame();
     } else if (this.score === 9) {
       this.score++;
@@ -52,6 +54,7 @@ class Game {
       document.getElementById("message").innerHTML = "Next level: HARD MODE!";
       this.trashArr.splice(this.trashArr[0], 1); //updating my trashArr, moving to next Obj
       this.trashImg.src = this.trashArr[0].img;
+      this.trashAudio.play();
       //UPDATE BACKGROUND IMAGE HERE
       document.getElementById("game-play").style.backgroundImage =
         "url('/the-trash-separator/images/game-screen-background-level10plus.png')";
@@ -61,6 +64,7 @@ class Game {
       document.getElementById("message").innerHTML = "Yeah, onto the next one!";
       this.trashArr.splice(this.trashArr[0], 1); //updating my trashArr, moving to next Obj
       this.trashImg.src = this.trashArr[0].img; // loading the next img
+      this.trashAudio.play();
     }
   }
 
