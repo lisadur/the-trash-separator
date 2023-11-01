@@ -1,7 +1,15 @@
 window.onload = function () {
   const startButton = document.getElementById("start-button");
+  const restartButton = document.getElementById("restart-button");
+  const winRestartButton = document.getElementById("win-restart-button");
   const game = new Game(trash); //actually "calling" the Game class
   let keydownListenerAdded = false; //storing in a variable if the arrow keys were added, should not work before startGame()!!!
+
+  const gameStarted = localStorage.getItem("gameStarted") === "true"; //check if game was already started
+  if (gameStarted) {
+    startGame();
+  }
+
   startButton.addEventListener("click", function () {
     startGame();
   });
@@ -9,11 +17,24 @@ window.onload = function () {
   function startGame() {
     console.log("start game");
     game.start();
+    localStorage.setItem("gameStarted", "true"); //Mark game as started before!
 
     if (!keydownListenerAdded) {
       window.addEventListener("keydown", handleKeydown); //adding now after game.start()
       keydownListenerAdded = true;
     }
+  }
+
+  restartButton.addEventListener("click", function () {
+    restartGame();
+  });
+
+  winRestartButton.addEventListener("click", function () {
+    restartGame();
+  });
+
+  function restartGame() {
+    location.reload();
   }
 
   function handleKeydown(event) {
@@ -172,7 +193,8 @@ class Game {
   constructor(trashArr) {
     this.startScreen = document.querySelector("#game-start");
     this.gameScreen = document.querySelector("#game-play");
-    this.gameEndScreen = document.querySelector("#game-end");
+    this.gameEndLostScreen = document.querySelector("#game-end-lost");
+    this.gameEndWinScreen = document.querySelector("#game-end-won");
     this.currentTrashIndex = 0;
     this.trashImg;
     this.height = 500;
@@ -232,15 +254,19 @@ class Game {
 
   lostGame() {
     this.gameIsOver = true;
-    console.log(
-      `You lose! The item belongs in the ${this.trashArr[0].bin} bin!`
-    );
+    this.gameScreen.style.display = "none";
+    this.gameEndLostScreen.style.display = "block";
+    // attach p loser text into class congrats:
+    let loserParagraph = document.querySelector(".loser");
+    loserParagraph.innerHTML = `You lose! The item belongs in the ${this.trashArr[0].bin} bin!`;
   }
 
   wonGame() {
     this.gameIsOver = true;
+    this.gameScreen.style.display = "none";
+    this.gameEndWinScreen.style.display = "block";
+    // somehow the restart button will not work if you won the game. Instead make a social share button?
     console.log(`YOU WIN OMG!!!!!!!`);
     console.log("YOUR SCORE IS", this.score);
   }
 }
-
