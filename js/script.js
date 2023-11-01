@@ -18,7 +18,14 @@ window.onload = function () {
     console.log("start game");
     game.start();
     localStorage.setItem("gameStarted", "true"); //Mark game as started before!
-
+    //REMOVE THE INSTRUCTIONS ITEM FROM THE SCREEN:
+    let instructions = document.querySelector(".instructions-bins");
+    instructions.style.display = "none";
+    // NOW LET'S ADD MY SCORE CARD IN HERE -> is display:none in the beginning
+    let scoreCard = document.querySelector(".score-container");
+    scoreCard.style.display = "block";
+    document.getElementById("message").innerHTML =
+      "Use the arrow keys on your keyboard to separate the trash!";
     if (!keydownListenerAdded) {
       window.addEventListener("keydown", handleKeydown); //adding now after game.start()
       keydownListenerAdded = true;
@@ -234,10 +241,13 @@ class Game {
       return;
     } else if (this.score >= this.originalTrashArrLength - 1) {
       this.score++;
+      document.getElementById("show-score").innerHTML++;
+      document.getElementById("message").innerHTML = "HELL YEAH!";
       this.wonGame();
     } else {
       this.score++;
-      console.log("YOUR SCORE IS", this.score);
+      document.getElementById("show-score").innerHTML++;
+      document.getElementById("message").innerHTML = "Yeah, onto the next one!";
       this.trashArr.splice(this.trashArr[0], 1); //updating my trashArr, moving to next Obj
       this.trashImg.src = this.trashArr[0].img; // loading the next img
     }
@@ -245,7 +255,9 @@ class Game {
 
   lostRound() {
     this.lives--;
+    document.getElementById("show-lives").innerHTML--;
     if (this.lives > 0) {
+      document.getElementById("message").innerHTML = "Try again!";
       console.log("Try again - Use your Joker!");
     } else {
       this.lostGame();
@@ -256,6 +268,7 @@ class Game {
     this.gameIsOver = true;
     this.gameScreen.style.display = "none";
     this.gameEndLostScreen.style.display = "block";
+    document.getElementById("message").innerHTML = "Noooo!";
     // attach p loser text into class congrats:
     let loserParagraph = document.querySelector(".loser");
     loserParagraph.innerHTML = `You lose! The item belongs in the ${this.trashArr[0].bin} bin!`;
