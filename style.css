@@ -47,7 +47,9 @@ ul {
   color: #000000;
 }
 
-#start-button {
+#start-button,
+#restart-button,
+#win-restart-button {
   color: #ffffff;
   background-color: #7fb069;
   border-radius: 5px;
@@ -88,4 +90,16 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#game-end-lost,
+#game-end-won {
+  background: white;
+  display: none;
+  padding: 20px;
+  max-width: 650px;
+  text-align: center;
+  margin: auto;
+  border: none;
+  border-radius: 8px;
 }

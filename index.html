@@ -61,8 +61,22 @@
       </div>
       <!-- #game-play is initially hidden using CSS style display: none -->
       <div id="game-play"></div>
-      <!-- #game-end is initially hidden using CSS style display: none -->
-      <div id="game-end"></div>
+
+      <!-- #game-end-lost is initially hidden using CSS style display: none -->
+      <div id="game-end-lost">
+        <h1>Game over 😭</h1>
+        <p class="loser"></p>
+        <button id="restart-button">Restart game</button>
+      </div>
+
+      <!-- #game-end-won is initially hidden using CSS style display: none -->
+      <div id="game-end-won">
+        <h1>Congratulations! 🥳</h1>
+        <p class="congrats">
+          Congratulations! You are Germany's top trash master. Wanna play again?
+        </p>
+        <button id="win-restart-button">Play again</button>
+      </div>
     </main>
     <script type="text/javascript" src="js/trash.js"></script>
     <script type="text/javascript" src="js/game.js"></script>
