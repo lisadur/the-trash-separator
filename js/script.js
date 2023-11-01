@@ -18,14 +18,14 @@ window.onload = function () {
     console.log("start game");
     game.start();
     localStorage.setItem("gameStarted", "true"); //Mark game as started before!
-    //REMOVE THE INSTRUCTIONS ITEM FROM THE SCREEN:
+
     let instructions = document.querySelector(".instructions-bins");
-    instructions.style.display = "none";
-    // NOW LET'S ADD MY SCORE CARD IN HERE -> is display:none in the beginning
+    instructions.style.display = "none"; //removing from game screen
     let scoreCard = document.querySelector(".score-container");
-    scoreCard.style.display = "block";
+    scoreCard.style.display = "block"; //is display:none in the beginning
     document.getElementById("message").innerHTML =
-      "Use the arrow keys on your keyboard to separate the trash!";
+      "Use the arrow keys on your keyboard!";
+
     if (!keydownListenerAdded) {
       window.addEventListener("keydown", handleKeydown); //adding now after game.start()
       keydownListenerAdded = true;
@@ -244,6 +244,15 @@ class Game {
       document.getElementById("show-score").innerHTML++;
       document.getElementById("message").innerHTML = "HELL YEAH!";
       this.wonGame();
+    } else if (this.score === 9) {
+      this.score++;
+      document.getElementById("show-score").innerHTML++;
+      document.getElementById("message").innerHTML = "Next level: HARD MODE!";
+      this.trashArr.splice(this.trashArr[0], 1); //updating my trashArr, moving to next Obj
+      this.trashImg.src = this.trashArr[0].img;
+      //UPDATE BACKGROUND IMAGE HERE
+      document.getElementById("game-play").style.backgroundImage =
+        "url('/the-trash-separator/images/game-screen-background-level10plus.png')";
     } else {
       this.score++;
       document.getElementById("show-score").innerHTML++;
