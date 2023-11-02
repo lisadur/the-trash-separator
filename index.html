@@ -51,17 +51,20 @@
       <!-- #game-start is initially shown on the game start screen // -->
       <div id="game-start">
         <h1>Show your recycling skills!</h1>
-        <hr />
 
         <section>
           <p class="intro">
-            Welcome to Germany! Make your landlord happy and contribute to
-            recycling trash by allocating it into the correct bins.<br />
-            <br />
+            Make your landlord happy and contribute to recycling trash by
+            allocating it into the correct bins.
             <span class="bold-text">
               Use the arrow keys on your keyboard to play!</span
             >
           </p>
+          <img
+            class="trashbin-characters"
+            src="/the-trash-separator/images/starting-trash.png"
+            alt="Happy Trash Bin with apple"
+          />
         </section>
 
         <button id="start-button">Click to start</button>
@@ -86,6 +89,13 @@
           id="lose-sound"
           src="/the-trash-separator/sounds/losing-sound.mp3"
         ></audio>
+        <div>
+          <img
+            class="trashbin-characters"
+            src="/the-trash-separator/images/losing-trash.png"
+            alt="sad trash bin"
+          />
+        </div>
         <button id="restart-button">Restart game</button>
       </div>
 
@@ -99,6 +109,13 @@
           id="win-sound"
           src="/the-trash-separator/sounds/winning-sound.wav"
         ></audio>
+        <div>
+          <img
+            class="trashbin-characters"
+            src="/the-trash-separator/images/winning-trash.png"
+            alt="happy trash bin"
+          />
+        </div>
         <button id="win-restart-button">Play again</button>
       </div>
     </main>
