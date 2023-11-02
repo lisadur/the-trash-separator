@@ -1,6 +1,6 @@
 # The Trash Separator - German edition
 
-[Click to play](http://github.com)
+[Click to play](https://lisadur.github.io/the-trash-separator/)
 
 ## Description
 
@@ -14,7 +14,7 @@ The Trash Separator is an educational game in which the player has to dispose tr
   - By pressing right, the trash item is allocated to the yellow trash bin (plastics / packaging)
   - By pressing down, the trash item is allocated to the blue trash bin (paper / cardboard)
   - By pressing left, the trash item is allocated to the black trash bin (residual waste)
-- When the trash item is allocated correctly, the user receives a trash point (score goes up), and the next item is shown
+- When the trash item is allocated correctly, the player's score increases, and the next item is shown
 - Players have 3 lives
 - If an item is placed in the wrong bin, players lose one life and get a message to try again, as well as a hint on which trash bin to choose
 - If all lives are used up, the game is over - and players will receive a message about where they should have placed their last trash item correctly. Also, they can restart the game by pressing a restart button.
@@ -80,4 +80,4 @@ The Trash Separator is an educational game in which the player has to dispose tr
 - [Trello Link](https://trello.com/b/BZtx731b/project-the-trash-separator)
 - [Slides Link](https://docs.google.com/presentation/d/1usc2Vq_osVqzSkqu9MFdPV4W6kLMnrwa5BM6Wp5dupo/edit?usp=sharing)
 - [Github repository Link](https://github.com/lisadur/the-trash-separator)
-- [Deployment Link](http://github.com)
+- [Deployment Link](https://lisadur.github.io/the-trash-separator/)
