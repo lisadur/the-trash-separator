@@ -55,7 +55,7 @@ ul {
   border-radius: 5px;
   border: none;
   font-size: 20px;
-  padding: 10px 20px;
+  padding: 20px 30px;
   margin: 10px;
   text-transform: uppercase;
 }
@@ -129,4 +129,9 @@ header {
   margin: auto;
   border: none;
   border-radius: 8px;
+}
+
+.trashbin-characters {
+  height: 200px;
+  width: 200px;
 }

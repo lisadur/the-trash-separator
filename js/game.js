@@ -22,7 +22,7 @@ class Game {
     this.placeHolder.style.display = "none"; //do not show placeHolder for flexbox at the beginning
     this.score = 0;
     this.lives = 3;
-    this.originalTrashArrLength = trashArr.length;
+    this.originalTrashArrLength = trashArr.length; //storing the original length
     this.gameIsOver = false;
     this.trashAudio = document.getElementById("trash-sound");
     this.failAudio = document.getElementById("fail-sound");
