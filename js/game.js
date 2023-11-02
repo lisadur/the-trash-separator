@@ -44,10 +44,11 @@ class Game {
 
   gameShuffle() {
     for (let i = this.trashArr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      const temp = this.trashArr[i];
-      this.trashArr[i] = this.trashArr[j];
-      this.trashArr[j] = temp;
+      // we don't ever want i to reach index 0 so that we ensure the last element is not swapping with itself
+      const j = Math.floor(Math.random() * (i + 1)); // generate a random number between 0 and i (inclusive)
+      const temp = this.trashArr[i]; // store the temporary value of where we are in loop
+      this.trashArr[i] = this.trashArr[j]; // here we swap the current value for a random position
+      this.trashArr[j] = temp; //This line then assigns the original value of this.trashArr[i] (which was stored in the temp variable in step 4) to the element at index j. This completes the swap, ensuring that the elements are shuffled within the array.
     }
   }
 
