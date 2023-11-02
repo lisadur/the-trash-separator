@@ -5,14 +5,21 @@ class Game {
     this.gameEndLostScreen = document.querySelector("#game-end-lost");
     this.gameEndWinScreen = document.querySelector("#game-end-won");
     this.currentTrashIndex = 0;
-    this.trashImg;
     this.height = 500;
     this.width = 500;
     this.trashArr = trashArr;
+    this.placeHolder = document.createElement("div");
+    this.placeHolder.style.width = "128px";
+    this.placeHolder.style.height = "128px";
+    this.gameScreen.appendChild(this.placeHolder);
     this.trashImg = document.createElement("img");
-    this.trashImg.style.position = "relative";
     this.trashImg.style.width = "155px";
     this.gameScreen.appendChild(this.trashImg);
+    this.hintsCircle = document.createElement("img");
+    this.hintsCircle.src = "/the-trash-separator/images/hints-circle.gif";
+    this.gameScreen.appendChild(this.hintsCircle);
+    this.hintsCircle.style.display = "none"; //do not show hint at the beginning
+    this.placeHolder.style.display = "none"; //do not show placeHolder for flexbox at the beginning
     this.score = 0;
     this.lives = 3;
     this.originalTrashArrLength = trashArr.length;
@@ -26,8 +33,10 @@ class Game {
   start() {
     this.gameScreen.style.height = `${this.height}px`;
     this.gameScreen.style.width = `${this.width}px`;
-    this.gameScreen.style.display = "grid";
-    this.gameScreen.style.placeItems = "center";
+    this.gameScreen.style.display = "flex";
+    this.gameScreen.style.flexDirection = "row"; //change when needed
+    this.gameScreen.style.justifyContent = "center"; //change when needed
+    this.gameScreen.style.alignItems = "center";
     this.startScreen.style.display = "none";
     this.gameShuffle();
     this.trashImg.src = this.trashArr[this.currentTrashIndex].img;
@@ -43,13 +52,15 @@ class Game {
   }
 
   newRound() {
+    this.gameScreen.style.justifyContent = "center";
+    this.hintsCircle.style.display = "none";
+    this.placeHolder.style.display = "none";
     if (this.gameIsOver === true) {
       return;
     } else if (this.score >= this.originalTrashArrLength - 1) {
       this.score++;
       document.getElementById("show-score").innerHTML++;
       document.getElementById("message").innerHTML = "HELL YEAH!";
-      this.trashAudio.play(); // EXCHANGE FOR WINNING SOUND
       this.wonGame();
     } else if (this.score === 9) {
       this.score++;
@@ -75,8 +86,21 @@ class Game {
     this.lives--;
     document.getElementById("show-lives").innerHTML--;
     if (this.lives > 0) {
-      document.getElementById("message").innerHTML = "Try again!";
+      document.getElementById("message").innerHTML = "Try again! Use the hint.";
       this.failAudio.play();
+      this.hintsCircle.style.display = "block"; //display hint
+      this.placeHolder.style.display = "block"; //display placeHolder
+      this.gameScreen.style.justifyContent = "space-between";
+
+      if (this.trashArr[0].bin === "green") {
+        this.gameScreen.style.flexDirection = "column-reverse"; //change when needed
+      } else if (this.trashArr[0].bin === "yellow") {
+        this.gameScreen.style.flexDirection = "row"; //change when needed
+      } else if (this.trashArr[0].bin === "black") {
+        this.gameScreen.style.flexDirection = "row-reverse"; //change when needed;
+      } else {
+        this.gameScreen.style.flexDirection = "column"; //change when needed;
+      }
     } else {
       this.lostGame();
     }
