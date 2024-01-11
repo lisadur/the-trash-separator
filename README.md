@@ -9,11 +9,11 @@ The Trash Separator is an educational game in which the player has to dispose tr
 ## MVP
 
 - Trash objects (inside an array) are randomly shuffled at the beginning, then the first one is displayed to the player
-- Players separate the trash items by allocating them to the four trash bins by hitting the correct arrow key on their keyboards:
-  - By pressing up, the trash item is allocated to the green trash bin (organic waste)
-  - By pressing right, the trash item is allocated to the yellow trash bin (plastics / packaging)
-  - By pressing down, the trash item is allocated to the blue trash bin (paper / cardboard)
-  - By pressing left, the trash item is allocated to the black trash bin (residual waste)
+- Players separate the trash items by allocating them to the four trash bins by hitting the correct arrow key on their keyboards, or clicking on the respective arrows:
+  - Up: The trash item is allocated to the green trash bin (organic waste)
+  - Right: The trash item is allocated to the yellow trash bin (plastics / packaging)
+  - Down: The trash item is allocated to the blue trash bin (paper / cardboard)
+  - Left: The trash item is allocated to the black trash bin (residual waste)
 - When the trash item is allocated correctly, the player's score increases, and the next item is shown
 - Players have 3 lives
 - If an item is placed in the wrong bin, players lose one life and get a message to try again, as well as a hint on which trash bin to choose
@@ -37,6 +37,7 @@ The Trash Separator is an educational game in which the player has to dispose tr
   - startGame();
   - restartGame();
   - handleKeydown();
+  - handleArrowClick();
 - game.js
   - Game {}
     - constructor();
