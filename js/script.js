@@ -25,8 +25,9 @@ window.onload = function () {
     instructions.style.display = "none"; //removing from the game screen
     let scoreCard = document.querySelector(".score-container");
     scoreCard.style.display = "block"; //is display:none in the beginning
+
     document.getElementById("message").innerHTML =
-      "Use the arrow keys on your keyboard!";
+      "Tap on the arrows or use your keyboard!";
 
     if (!keydownListenerAdded) {
       window.addEventListener("keydown", handleKeydown); //adding now after game.start()
