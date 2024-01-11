@@ -72,7 +72,7 @@ class Game {
       this.trashAudio.play();
       //UPDATE BACKGROUND IMAGE HERE
       document.getElementById("game-play").style.backgroundImage =
-        "url('/the-trash-separator/game-screen-background-level10plus.png')";
+        "url('/the-trash-separator/images/game-screen-background-level10plus.png')";
     } else {
       this.score++;
       document.getElementById("show-score").innerHTML++;
