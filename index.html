@@ -3,6 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      href="./images/logo-trash-separator-final.png"
+      type="image/x-icon"
+    />
     <title>The Trash Separator</title>
     <link rel="stylesheet" href="style.css" />
     <link
@@ -44,7 +49,7 @@
         </div>
         <img
           class="logo-img"
-          src="/the-trash-separator/images/logo-trash-separator-final.png"
+          src="./images/logo-trash-separator-final.png"
           alt="the-trash-separator-logo"
         />
       </header>
@@ -57,12 +62,13 @@
             Make your landlord happy and contribute to recycling trash by
             allocating it into the correct bins.
             <span class="bold-text">
-              Use the arrow keys on your keyboard to play!</span
+              Use the arrow keys on your keyboard to play, or tap on the arrows
+              if you play on your phone!</span
             >
           </p>
           <img
             class="trashbin-characters"
-            src="/the-trash-separator/images/starting-trash.png"
+            src="./images/starting-trash.png"
             alt="Happy Trash Bin with apple"
           />
         </section>
@@ -71,28 +77,23 @@
       </div>
       <!-- #game-play is initially hidden using CSS style display: none -->
       <div id="game-play">
-        <audio
-          id="trash-sound"
-          src="/the-trash-separator/sounds/trash-sound.wav"
-        ></audio>
-        <audio
-          id="fail-sound"
-          src="/the-trash-separator/sounds/fail-sound.mp3"
-        ></audio>
+        <audio id="trash-sound" src="./sounds/trash-sound.wav"></audio>
+        <audio id="fail-sound" src="./sounds/fail-sound.mp3"></audio>
+        <img id="arrow-down" src="./images/arrow-key.png" />
+        <img id="arrow-up" src="./images/arrow-key.png" />
+        <img id="arrow-right" src="./images/arrow-key.png" />
+        <img id="arrow-left" src="./images/arrow-key.png" />
       </div>
 
       <!-- #game-end-lost is initially hidden using CSS style display: none -->
       <div id="game-end-lost">
         <h1>Game over 😭</h1>
         <p class="loser"></p>
-        <audio
-          id="lose-sound"
-          src="/the-trash-separator/sounds/losing-sound.mp3"
-        ></audio>
+        <audio id="lose-sound" src="./sounds/losing-sound.mp3"></audio>
         <div>
           <img
             class="trashbin-characters"
-            src="/the-trash-separator/images/losing-trash.png"
+            src="./images/losing-trash.png"
             alt="sad trash bin"
           />
         </div>
@@ -103,16 +104,14 @@
       <div id="game-end-won">
         <h1>Congratulations! 🥳</h1>
         <p class="congrats">
-          You are Germany's trash master and an absolute pro at separating waste! Wanna play again?
+          You are Germany's trash master and an absolute pro at separating
+          waste! Wanna play again?
         </p>
-        <audio
-          id="win-sound"
-          src="/the-trash-separator/sounds/winning-sound.wav"
-        ></audio>
+        <audio id="win-sound" src="./sounds/winning-sound.wav"></audio>
         <div>
           <img
             class="trashbin-characters"
-            src="/the-trash-separator/images/winning-trash.png"
+            src="./images/winning-trash.png"
             alt="happy trash bin"
           />
         </div>

@@ -3,9 +3,12 @@ window.onload = function () {
   const restartButton = document.getElementById("restart-button");
   const winRestartButton = document.getElementById("win-restart-button");
   const game = new Game(trash); //actually "calling" the Game class
-  let keydownListenerAdded = false; //storing in arrow key functionality was added
+  let keydownListenerAdded = false; //storing if arrow key functionality was added
+  const arrowImages = document.querySelectorAll(
+    "#arrow-down, #arrow-up, #arrow-right, #arrow-left"
+  );
 
-  const gameStarted = localStorage.getItem("gameStarted") === "true"; //check if game was already started
+  const gameStarted = localStorage.getItem("gameStarted") === "true"; //check if the game was already started
   if (gameStarted) {
     startGame();
   }
@@ -16,19 +19,40 @@ window.onload = function () {
 
   function startGame() {
     game.start();
-    localStorage.setItem("gameStarted", "true"); // Mark game as started before!
+    localStorage.setItem("gameStarted", "true"); // Mark the game as started
 
     let instructions = document.querySelector(".instructions-bins");
-    instructions.style.display = "none"; //removing from game screen
+    instructions.style.display = "none"; //removing from the game screen
     let scoreCard = document.querySelector(".score-container");
     scoreCard.style.display = "block"; //is display:none in the beginning
+
     document.getElementById("message").innerHTML =
-      "Use the arrow keys on your keyboard!";
+      "Tap on the arrows or use your keyboard!";
 
     if (!keydownListenerAdded) {
       window.addEventListener("keydown", handleKeydown); //adding now after game.start()
       keydownListenerAdded = true;
     }
+
+    // Add event listeners directly to each arrow image
+    document
+      .getElementById("arrow-down")
+      .addEventListener("click", function () {
+        handleArrowClick("down");
+      });
+    document.getElementById("arrow-up").addEventListener("click", function () {
+      handleArrowClick("up");
+    });
+    document
+      .getElementById("arrow-right")
+      .addEventListener("click", function () {
+        handleArrowClick("right");
+      });
+    document
+      .getElementById("arrow-left")
+      .addEventListener("click", function () {
+        handleArrowClick("left");
+      });
   }
 
   restartButton.addEventListener("click", function () {
@@ -45,50 +69,53 @@ window.onload = function () {
 
   function handleKeydown(event) {
     if (game.gameIsOver) {
-      window.removeEventListener("keydown", handleKeydown); //remove once game is over
+      window.removeEventListener("keydown", handleKeydown); //remove once the game is over
       return;
     }
+
     const key = event.key;
-    const possibleKeystrokes = [
-      "ArrowLeft",
-      "ArrowUp",
-      "ArrowRight",
-      "ArrowDown",
-    ];
+    if (key.startsWith("Arrow")) {
+      // Check if the key starts with "Arrow"
+      const direction = key.substring(5).toLowerCase(); // Extract direction from the key
+      handleInput(direction);
+      event.preventDefault(); // Prevent default behavior for arrow keys
+    }
+  }
 
-    if (possibleKeystrokes.includes(key)) {
-      event.preventDefault();
+  function handleArrowClick(direction) {
+    handleInput(direction);
+  }
 
-      switch (key) {
-        case "ArrowLeft":
-          if (game.trashArr[0].bin === "black") {
-            game.newRound();
-          } else {
-            game.lostRound();
-          }
-          break;
-        case "ArrowUp":
-          if (game.trashArr[0].bin === "green") {
-            game.newRound();
-          } else {
-            game.lostRound();
-          }
-          break;
-        case "ArrowRight":
-          if (game.trashArr[0].bin === "yellow") {
-            game.newRound();
-          } else {
-            game.lostRound();
-          }
-          break;
-        case "ArrowDown":
-          if (game.trashArr[0].bin === "blue") {
-            game.newRound();
-          } else {
-            game.lostRound();
-          }
-          break;
-      }
+  function handleInput(direction) {
+    switch (direction) {
+      case "left":
+        if (game.trashArr[0].bin === "black") {
+          game.newRound();
+        } else {
+          game.lostRound();
+        }
+        break;
+      case "up":
+        if (game.trashArr[0].bin === "green") {
+          game.newRound();
+        } else {
+          game.lostRound();
+        }
+        break;
+      case "right":
+        if (game.trashArr[0].bin === "yellow") {
+          game.newRound();
+        } else {
+          game.lostRound();
+        }
+        break;
+      case "down":
+        if (game.trashArr[0].bin === "blue") {
+          game.newRound();
+        } else {
+          game.lostRound();
+        }
+        break;
     }
   }
 };

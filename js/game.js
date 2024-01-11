@@ -16,7 +16,7 @@ class Game {
     this.trashImg.style.width = "155px";
     this.gameScreen.appendChild(this.trashImg);
     this.hintsCircle = document.createElement("img");
-    this.hintsCircle.src = "/the-trash-separator/images/hints-circle.gif";
+    this.hintsCircle.src = "../images/hints-circle.gif";
     this.gameScreen.appendChild(this.hintsCircle);
     this.hintsCircle.style.display = "none"; //do not show hint at the beginning
     this.placeHolder.style.display = "none"; //do not show placeHolder for flexbox at the beginning
@@ -72,7 +72,7 @@ class Game {
       this.trashAudio.play();
       //UPDATE BACKGROUND IMAGE HERE
       document.getElementById("game-play").style.backgroundImage =
-        "url('/the-trash-separator/images/game-screen-background-level10plus.png')";
+        "url('../images/game-screen-background-level10plus.png')";
     } else {
       this.score++;
       document.getElementById("show-score").innerHTML++;
@@ -98,6 +98,8 @@ class Game {
       } else if (this.trashArr[0].bin === "yellow") {
         this.gameScreen.style.flexDirection = "row"; //change when needed
       } else if (this.trashArr[0].bin === "black") {
+        //TEST
+        this.placeHolder.style.display = "block";
         this.gameScreen.style.flexDirection = "row-reverse"; //change when needed;
       } else {
         this.gameScreen.style.flexDirection = "column"; //change when needed;
