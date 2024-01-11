@@ -67,8 +67,39 @@ ul {
   text-align: center;
   overflow: hidden;
   position: relative;
-  background-image: url("../the-trash-separator/images/game-screen-background-level1-9.png");
+  background-image: url("../images/game-screen-background-level1-9.png");
   background-size: cover;
+}
+
+#arrow-down {
+  position: absolute;
+  top: 321px;
+  right: 223px;
+  width: 56px;
+}
+
+#arrow-up {
+  position: absolute;
+  bottom: 324px;
+  right: 223px;
+  width: 56px;
+  transform: rotate(180deg);
+}
+
+#arrow-right {
+  position: absolute;
+  bottom: 223px;
+  right: 114px;
+  width: 56px;
+  transform: rotate(270deg);
+}
+
+#arrow-left {
+  position: absolute;
+  bottom: 223px;
+  left: 114px;
+  width: 56px;
+  transform: rotate(90deg);
 }
 
 header .instructions-bins {
